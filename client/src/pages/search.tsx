@@ -9,8 +9,10 @@ export default function Search() {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    const params = new URLSearchParams(location.split('?')[1] || '');
-    const query = params.get('q');
+    // URLから検索クエリを抽出
+    const searchParams = new URLSearchParams(window.location.search);
+    const query = searchParams.get('q');
+    console.log('Search query from URL:', query); // デバッグ用
     if (query) {
       setSearchQuery(query);
     }

@@ -9,8 +9,10 @@ export default function Watch() {
   const [videoId, setVideoId] = useState("");
 
   useEffect(() => {
-    const params = new URLSearchParams(location.split('?')[1] || '');
-    const id = params.get('v');
+    // URLからビデオIDを抽出
+    const searchParams = new URLSearchParams(window.location.search);
+    const id = searchParams.get('v');
+    console.log('Video ID from URL:', id); // デバッグ用
     if (id) {
       setVideoId(id);
     }
