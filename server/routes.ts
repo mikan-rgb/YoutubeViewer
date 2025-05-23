@@ -2,7 +2,15 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 
+// より確実にAPIキーを取得
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || process.env.YOUTUBE_API_KEY_ENV_VAR || "";
+
+// デバッグ用ログ（本番環境では最初の文字のみ表示）
+if (process.env.NODE_ENV === "development") {
+  console.log("YouTube API Key loaded:", YOUTUBE_API_KEY ? `${YOUTUBE_API_KEY.substring(0, 10)}...` : "NOT FOUND");
+} else {
+  console.log("YouTube API Key status:", YOUTUBE_API_KEY ? "LOADED" : "NOT FOUND");
+}
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // YouTube API proxy endpoints
